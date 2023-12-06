@@ -41,7 +41,7 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-INSERT INTO `customers` VALUES (1,'Sergiy','Andrusyshyn','+380960691845','sergiyandru@gmail.com',2),(2,'Roman','Martynyschyn','+380976072348','romanmartyny@gmail.com',3),(3,'Andry','fizai','+380976054748','andryfizi@gmail.com',4),(4,'Kosta','Bagry','+380976054777','Kosta228@gmail.com',5);
+INSERT INTO `customers` VALUES (1,'Sergiy','Andrusyshyn','+380960691855','sergiyandru@gmail.com',2),(2,'Roman','Martynyschyn','+380976072349','romanmartyne@gmail.com',3),(3,'Andry','fizai','+380976054748','andryfizi@gmail.com',4),(4,'Kosta','Bagry','+380976054777','Kosta228@gmail.com',5);
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
