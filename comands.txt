@@ -1,0 +1,188 @@
+create database car_service;
+
+CREATE TABLE customers (
+    id_client int primary key auto_increment,
+    FirstName varchar(55),
+    LastName varchar(55),
+    phone varchar(20),
+    mail varchar(155)
+);
+
+CREATE TABLE vehicles (
+	id_vehicles int primary key auto_increment,
+    vehicle_brand varchar(255),
+    vehicle_model varchar(255),
+    manufacture_year tinyint,
+    engine_size tinyint
+);
+
+CREATE TABLE repair_orders (
+	id_order int primary key auto_increment,
+	id_client int,
+    problem_description varchar(470),
+    date_order datetime
+);
+
+CREATE TABLE spare_parts (
+	id_detail int primary key auto_increment,
+    detail_title varchar(455),
+    serial_number int,
+    price varchar(150),
+    id_vehicle int
+);
+
+CREATE TABLE services (
+	id_repair_box int primary key auto_increment,
+    title_box varchar(255),
+    price varchar(150),
+    id_worker int
+);
+
+CREATE TABLE workers(
+	id_worker int primary key auto_increment,
+    FirstName varchar(55),
+    LastName varchar(55),
+    phone varchar(20),
+    residence_place varchar(355),
+    bank_account int
+);
+
+CREATE TABLE _check(
+	id_order int,
+    id_repair_box int,
+    id_detail int,
+    final_time datetime,
+    final_price varchar(150)
+);
+
+ALTER TABLE customers
+ADD id_vehicle int;
+
+ALTER TABLE vehicles
+MODIFY COLUMN engine_size int;
+
+ALTER TABLE workers
+MODIFY COLUMN bank_account varchar(16);
+
+ALTER TABLE _check
+MODIFY COLUMN final_price varchar(20);
+
+INSERT INTO customers (FirstName, LastName, phone, mail, id_vehicle)
+VALUES (
+"Kosta",
+"Bagry",
+"+380976054777",
+"Kosta228@gmail.com",
+4
+);
+
+INSERT INTO vehicles (vehicle_brand, vehicle_model, manufacture_year, engine_size)
+VALUES (
+"Porsche",
+"911",
+ 1963,
+ 3800
+);
+
+INSERT INTO repair_orders (id_client, problem_description, date_order)
+VALUES (
+4,
+"Встановлення stage2, stage3, stage4",
+'2023-05-15 12:30:24'
+);
+
+INSERT INTO services (title_box, price, id_worker)
+VALUES (
+"бокс встановлення тюнінгу",
+"2300грн",
+7
+);
+
+INSERT INTO spare_parts (detail_title, serial_number, price, id_vehicle)
+VALUES (
+"stage4 complect",
+27356,
+"4000грн",
+5
+);
+
+INSERT INTO workers (FirstName, LastName, phone, residence_place, bank_account)
+VALUES (
+"Oleg",
+"Schudlak",
+"+380663490586",
+"Місто Бережани, вул. Цегельна 23",
+4731186924302310
+);
+
+INSERT INTO _check (id_order, id_repair_box, id_detail, final_time, final_price)
+VALUES (
+1,
+7,
+"1,2,3",
+'2023-05-18 22:10:00',
+"11 750грн"
+);
+
+
+INSERT INTO _check (id_order, id_repair_box, id_detail, final_time, final_price)
+VALUES (
+2,
+5,
+4,
+'2023-12-5 21:40:10',
+"pivo"
+);
+
+SELECT 
+  _check.final_time,
+  _check.final_price,
+  repair_orders.problem_description,
+  repair_orders.id_client,
+  services.title_box,
+  spare_parts.detail_title
+FROM 
+  _check
+JOIN 
+  repair_orders ON _check.id_order = repair_orders.id_order
+JOIN 
+  services ON _check.id_repair_box = services.id_repair_box
+JOIN 
+  spare_parts ON _check.id_detail = spare_parts.id_detail;
+
+
+SELECT 
+  _check.final_time,
+  _check.final_price,
+  repair_orders.problem_description,
+  repair_orders.id_client,
+  services.title_box,
+  spare_parts.detail_title
+FROM 
+  _check
+JOIN 
+  repair_orders ON _check.id_order = repair_orders.id_client
+JOIN 
+  services ON _check.id_repair_box = services.id_repair_box
+JOIN 
+  spare_parts ON _check.id_detail = spare_parts.id_detail
+
+
+SELECT * FROM car_service.services
+WHERE price >= 1200
+ORDER BY price DESC;
+
+INSERT INTO spare_parts (detail_title, serial_number, price, id_vehicle)
+VALUES (
+"передня гофра вихлопної системи",
+77356,
+"1200грн",
+2
+);
+
+INSERT INTO repair_orders (id_client, problem_description, date_order)
+VALUES (
+1,
+"ремонт вихлопної системи",
+'2023-11-22 17:32:24'
+);
